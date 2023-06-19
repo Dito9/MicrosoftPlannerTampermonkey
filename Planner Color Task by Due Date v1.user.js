@@ -4,7 +4,7 @@
 // @author      @diego.garate
 // @namespace   planner-background-color
 // @match       https://tasks.office.com/*
-// @version     2023.06.11
+// @version     2023.06.18
 // ==/UserScript==
 
 /* eslint-env browser, greasemonkey */
