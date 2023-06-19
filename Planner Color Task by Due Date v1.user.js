@@ -13,11 +13,26 @@
 const taskBoardelector = ".taskBoardView"
 const taskCardSelector = ".taskBoardCard";
 
-const today = new Date();
-const day = String(today.getDate()).padStart(2, '0');
-const month = String(today.getMonth() + 1).padStart(2, '0');
-const formattedDate = `${day}.${month}`;
-console.log(formattedDate);
+function extractDateFromTitle(str) {
+    const regex = /(\d{1,2})\.(\d{1,2})\.(\d{2}|\d{4})/;
+    const match = str.match(regex);
+    if (match) {
+      const day = parseInt(match[1], 10);
+      const month = parseInt(match[2], 10) - 1; // Month is zero-based in Date objects
+      const year = match[3].length === 2 ? 2000 + parseInt(match[3], 10) : parseInt(match[3], 10);
+      return new Date(year, month, day);
+    }
+    return null; // Return null if no date is found
+}
+
+function todayOrBefore(taskTitle){
+    const titleDate = extractDateFromTitle(taskTitle);
+    if (titleDate===null) return false;
+    const today = new Date()
+
+    if (titleDate<=today) return true;
+    return false;
+}
 
 function checkTeamsLoaded() {
   const teamsElement = document.querySelector(taskCardSelector); // Replace with the actual class or selector of an element that indicates Teams has loaded
@@ -40,6 +55,7 @@ function checkTeamsLoaded() {
 function changeBackgroundToDueTask() {
     //look for all task
     const allTask = document.querySelectorAll(taskCardSelector);
+    console.log(allTask);
     applyBackgroundColorsTo(allTask);
 }
 
@@ -48,7 +64,7 @@ function applyBackgroundColorsTo(taskElements) {
     const taskTitle = taskElement.querySelector('.title').textContent; // Replace '.task-title-selector' with the actual selector for the task title in the task element
 
     // Check the task title and apply background color based on conditions
-    if ( taskTitle.includes(formattedDate)) {
+    if ( todayOrBefore(taskTitle)) {
       const taskContainer = taskElement.querySelector(".container")
       taskContainer.style.backgroundColor = 'red';
     }
