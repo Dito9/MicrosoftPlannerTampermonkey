@@ -3,8 +3,10 @@
 // @description Set background color if waiting date is today in Microsoft Planner
 // @author      @diego.garate
 // @namespace   planner-background-color
+// @downloadURL  https://github.com/Dito9/MicrosoftPlannerTampermonkey/raw/main/Planner%20Color%20Task%20by%20Due%20Date%20v1.user.js
+// @updateURL    https://github.com/Dito9/MicrosoftPlannerTampermonkey/raw/main/Planner%20Color%20Task%20by%20Due%20Date%20v1.user.js
 // @match       https://tasks.office.com/*
-// @version     2023.06.18
+// @version     2023.06.19
 // ==/UserScript==
 
 /* eslint-env browser, greasemonkey */
